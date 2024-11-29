@@ -6,12 +6,6 @@
  */
 package com.my.company.custom.provider.api;
 
-import static org.mule.runtime.api.meta.Category.SELECT;
-import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
-import static org.mule.sdk.api.meta.JavaVersion.JAVA_11;
-import static org.mule.sdk.api.meta.JavaVersion.JAVA_17;
-import static org.mule.sdk.api.meta.JavaVersion.JAVA_8;
-
 import org.mule.runtime.extension.api.annotation.Alias;
 import org.mule.runtime.extension.api.annotation.Export;
 import org.mule.runtime.extension.api.annotation.Expression;
@@ -19,23 +13,24 @@ import org.mule.runtime.extension.api.annotation.Extension;
 import org.mule.runtime.extension.api.annotation.param.Parameter;
 import org.mule.sdk.api.annotation.JavaVersionSupport;
 
+import static org.mule.runtime.api.meta.Category.SELECT;
+import static org.mule.runtime.api.meta.ExpressionSupport.NOT_SUPPORTED;
+import static org.mule.sdk.api.meta.JavaVersion.*;
+
 /**
  * Declares extension for Custom Properties Configuration module
  *
  * @since 1.0
  */
-@Extension(name = CustomConfigurationPropertiesExtension.EXTENSION_NAME,
+@Extension(name = VariablesConfigurationPropertiesExtension.EXTENSION_NAME,
            category = SELECT,
-           vendor = "MyCompany")
+           vendor = "EDF")
 @JavaVersionSupport({JAVA_8, JAVA_11, JAVA_17})
-@Export(classes = CustomConfigurationPropertiesProviderFactory.class,
+@Export(classes = VariablesConfigurationPropertiesProviderFactory.class,
         resources = {"META-INF/services/org.mule.runtime.config.api.dsl.model.properties.ConfigurationPropertiesProviderFactory"})
-public class CustomConfigurationPropertiesExtension {
+public class VariablesConfigurationPropertiesExtension {
+  public static final String EXTENSION_NAME = "Variables Properties Provider";
 
-  // TODO replace with you extension name. This must be a meaningful name for this module.
-  public static final String EXTENSION_NAME = "Custom Properties Provider";
-
-  // TODO you can add/remove configuration parameter using the code below.
   @Parameter
   @Alias(value="customParameter", description = "Meaningful description of what customParameter is for")
   @Expression(NOT_SUPPORTED)

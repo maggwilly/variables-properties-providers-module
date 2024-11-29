@@ -4,11 +4,11 @@
          xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
 
     <modelVersion>4.0.0</modelVersion>
-    <groupId>com.my.company.custom.provider</groupId>
-    <artifactId>mule-custom-properties-providers-module</artifactId>
+    <groupId>6cde5e5e-816c-4ee5-b0ee-07655c9f5870</groupId>
+    <artifactId>variables-properties-providers-module</artifactId>
     <version>1.0.0-SNAPSHOT</version>
     <packaging>mule-extension</packaging>
-    <name>Custom properties provider Extension</name>
+    <name>variables-properties-providers-module</name>
 
     <parent>
         <groupId>org.mule.extensions</groupId>
@@ -19,7 +19,7 @@
     <properties>
         <munit.extensions.maven.plugin.version>1.3.0</munit.extensions.maven.plugin.version>
         <munit.min.mule.version>${mule.version}</munit.min.mule.version>
-
+        <snakeYamlVersion>1.26</snakeYamlVersion>
         <!-- Latest MUnit plugins version supporting this artifact's MMV (4.1.1)-->
         <munit.version>2.3.18</munit.version>
     </properties>
@@ -65,7 +65,22 @@
             <version>${mule.version}</version>
             <scope>provided</scope>
         </dependency>
+        <dependency>
+            <groupId>commons-codec</groupId>
+            <artifactId>commons-codec</artifactId>
+            <version>1.15</version>
+        </dependency>
 
+        <dependency>
+            <groupId>commons-io</groupId>
+            <artifactId>commons-io</artifactId>
+            <version>2.8.0</version>
+        </dependency>
+        <dependency>
+            <groupId>org.yaml</groupId>
+            <artifactId>snakeyaml</artifactId>
+            <version>${snakeYamlVersion}</version>
+        </dependency>
         <dependency>
             <groupId>com.mulesoft.munit</groupId>
             <artifactId>munit-runner</artifactId>
@@ -94,12 +109,33 @@
         </profile>
     </profiles>
 
+    <pluginRepositories>
+        <pluginRepository>
+            <id>mulesoft-releases</id>
+            <name>mulesoft release repository</name>
+            <layout>default</layout>
+            <url>https://repository.mulesoft.org/releases/</url>
+            <snapshots>
+                <enabled>false</enabled>
+            </snapshots>
+        </pluginRepository>
+    </pluginRepositories>
     <repositories>
         <repository>
-            <id>MuleSoft repository</id>
-            <name>MuleSoft repository</name>
-            <url>https://repository-master.mulesoft.org/nexus/content/repositories/releases/</url>
+            <id>anypoint-exchange-v3</id>
+            <name>Anypoint Exchange V3</name>
+            <url>https://maven.eu1.anypoint.mulesoft.com/api/v3/maven</url>
+            <layout>default</layout>
         </repository>
     </repositories>
+    <distributionManagement>
+        <repository>
+            <id>anypoint-exchange-v3</id>
+            <name>Corporate Repository</name>
+            <url>https://maven.eu1.anypoint.mulesoft.com/api/v3/organizations/${project.groupId}/maven</url>
+            <layout>default</layout>
+        </repository>
+    </distributionManagement>
+
 
 </project>
